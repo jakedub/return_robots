@@ -13,6 +13,7 @@ app.set("views", "./views")
 app.set("view engine", "mustache")
 app.use(express.static("public"))
 
+//NOTE  DO NOT UNCOMMENT
 // MongoClient.connect(uri)
 //   .then(function(db){
 //     return db.collection("users").insertMany(data.users)
@@ -20,17 +21,31 @@ app.use(express.static("public"))
 //   .then(function(result){
 //     console.log(result);
 //   });
-//Mongo connections
+
+
+//Unemployed
 app.get("/jobs", function(req, res){
   MongoClient.connect(uri)
     .then(function(db){
       return db.collection("users").find({job:null}).toArray(function(err, doc){
-        console.log(doc);
+        // console.log(doc);
         res.render("jobs", {robot:doc});
       }); //pulls in first present but won't work with find. Need to be able to display it
       db.close();
     });
   });
+
+  //Employed
+  app.get("/employed", function(req, res){
+    MongoClient.connect(uri)
+      .then(function(db){
+        return db.collection("users").find({job: {$ne: null}}).toArray(function(err, doc){
+          // console.log(doc);
+          res.render("employed", {robot:doc});
+        }); //pulls in first present but won't work with find. Need to be able to display it
+        db.close();
+      });
+    });
 
 
 // app.get('/jobs', function(req, res) {
