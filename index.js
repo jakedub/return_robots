@@ -16,7 +16,7 @@ app.use(express.static("public"))
 //Mongo connections
   MongoClient.connect(uri)
     .then(function(db){
-      return db.collection("users").findOne({"job": null});
+      return db.collection("users").findOne({"job":null}); //pulls in first present but won't work with find. Need to be able to display it
     })
     .then(function(result){
       console.log(result);
@@ -29,7 +29,7 @@ app.get('/user', function (req, res) {
 
 app.get("/jobs", function (req,res){
   res.render("jobs", data);
-});
+})
 
 
 app.get('/user/:id', function (req,res){
