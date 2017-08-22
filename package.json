@@ -1,0 +1,25 @@
+{
+  "name": "return_robots",
+  "version": "1.0.0",
+  "description": "initial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakedub/return_robots.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jakedub/return_robots/issues"
+  },
+  "homepage": "https://github.com/jakedub/return_robots#readme",
+  "dependencies": {
+    "express": "^4.15.4",
+    "mustache-express": "^1.2.5"
+  }
+}
