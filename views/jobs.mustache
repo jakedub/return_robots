@@ -6,13 +6,11 @@
         <link rel="stylesheet" href="style.css" >
   </head>
   <body>
-    <header><h1>Index</h1></header>
+    <header><h1>Looking for Employment</h1></header>
     <ul class="wrapper">
+      <h3>These Are The Robots You Are Looking For</h3>
       {{#users}}
-      <li>
-        <a href="/user/{{id}}" class="userbox">
-        <img src="{{avatar}}" />
-        <br />
+      <li>{{name}}<img src="{{avatar}}" />
       </li>
       {{/users}}
     </ul>
