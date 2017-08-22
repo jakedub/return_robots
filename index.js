@@ -13,23 +13,46 @@ app.set("views", "./views")
 app.set("view engine", "mustache")
 app.use(express.static("public"))
 
+// MongoClient.connect(uri)
+//   .then(function(db){
+//     return db.collection("users").insertMany(data.users)
+//   })
+//   .then(function(result){
+//     console.log(result);
+//   });
 //Mongo connections
+app.get("/jobs", function(req, res){
   MongoClient.connect(uri)
     .then(function(db){
-      return db.collection("users").findOne({"job":null}); //pulls in first present but won't work with find. Need to be able to display it
-    })
-    .then(function(result){
-      console.log(result);
-    })
+      return db.collection("users").find({job:null}).toArray(function(err, doc){
+        console.log(doc);
+        res.render("jobs", {robot:doc});
+      }); //pulls in first present but won't work with find. Need to be able to display it
+      db.close();
+    });
+  });
 
+
+// app.get('/jobs', function(req, res) {
+//   MongoClient.connect(uri, function(err, db) {
+//     let robots = db.collection("users");
+//     robots.find({job: null}).toArray(function(err, docs) {
+//       res.render("jobs", {robot: docs});
+//     });
+//     db.close();
+//
+//   });
+// });
 
 app.get('/user', function (req, res) {
   res.render("user", data);
 });
 
-app.get("/jobs", function (req,res){
-  res.render("jobs", data);
-})
+
+// app.post("/jobs", function (req,res){
+//   return db.collection("users").findOne({"job":null});
+//   res.redirect("jobs", data.users);
+// })
 
 
 app.get('/user/:id', function (req,res){
@@ -40,4 +63,4 @@ app.get('/user/:id', function (req,res){
 
 app.listen(3000, function () {
   console.log('The robots are coming');
-})
+});
