@@ -14,7 +14,25 @@ app.set("view engine", "mustache")
 app.use(express.static("public"))
 
 app.get('/user', function (req, res) {
-  res.render("user", realData);
+  res.render("user", data);
+});
+
+// app.get('/jobs', function (req, res) {
+//   res.render("jobs", data);
+// });
+
+app.get("/jobs", function (req, res){
+  MongoClient.connect(uri)
+  .then(function(db){
+    return db.collection("users").insertMany(data.users);
+  })
+  .then(function(users){
+    return db.users.findOne(data.users);
+  })
+  then(function(result){
+    console.log(result);
+  })
+  res.render("jobs", data)
 });
 
 app.get('/template/:id', function (req,res){
@@ -28,10 +46,10 @@ app.listen(3000, function () {
 })
 
 //Mongo connections
-  MongoClient.connect(uri)
-    .then(function(db){
-      return db.collection("users").insertMany(data.users);
-    })
-    .then(function(result){
-      console.log(result);
-    })
+  // MongoClient.connect(uri)
+  //   .then(function(db){
+  //     return db.collection("users").insertMany(data.users);
+  //   })
+  //   .then(function(result){
+  //     console.log(result);
+  //   })
