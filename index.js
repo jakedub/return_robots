@@ -74,8 +74,8 @@ app.get("/jobs", function(req, res){
 
 
 app.get('/user/:id', function (req,res){
-  let userId= req.params.id-1;
-  let user = data.users[userId];
+  let userId= req.params.id;
+  let user = url.users[userId];
   MongoClient.connect(url)
   .then(function(db){
     return db.collection("users").find().toArray(function(err, doc){
